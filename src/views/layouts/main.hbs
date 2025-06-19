@@ -2,53 +2,52 @@
 
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      {{#if pageTitle}}
-        {{pageTitle}}
-      {{else}}
-        GlowAlchemy
-      {{/if}}
-    </title>
-    <link rel="stylesheet" href="/static/css/styles.css" />
+    <!-- Do not forget to change the path to the css file -->
+    <title> {{#if pageTitle}} {{pageTitle}} {{else}} Home Page {{/if}} </title>
+    <link href="./static/css/style.css" type="text/css" rel="stylesheet" />
   </head>
 
   <body>
-    <header>
-      <nav>
 
-        <ul>
-          <li>{{#if user}}
-              {{user.username}}
-            {{/if}}</li>
-          <li><a href="/">Home</a></li>
-          <li><a href="/cosmetics/catalog">Products</a></li>
-          <li><a href="/cosmetics/search">Search</a></li>
-          {{#if user.isAuthenticated}}
-            <li><a href="/cosmetics/create">Add Product</a></li>
-            <li><a href="/users/logout">Logout</a></li>
-          {{else}}
-            <li><a href="/users/login">Login</a></li>
-            <li><a href="/users/register">Register</a></li>
+    <div id="box">
 
-          {{/if}}
-
-        </ul>
-      </nav>
-    </header>
-    <main>
-
+      <!-- In case of error, you should display div with class "errorContainer" -->
+      <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
       {{#if error}}
-        <div class="error-container">
-          <p> {{error}} </p>
+        <div>
+          <div class="errorContainer">
+            <p>{{error}}</p>
+          </div>
         </div>
       {{/if}}
-      {{{body}}}
 
-    </main>
-    <footer>
-      <p>&copy; 2024 GlowAlchemy. All rights reserved.</p>
-    </footer>
+      <nav>
+        <a href="/">Home</a>
+        <ul>
+          <!-- Guest users and Logged users -->
+          <li><a href="#">Housing for rent</a></li>
+          {{#if user.isAuthenticated}}
+            <!-- Logged users -->
+            <li><a href="#">Create offer</a></li>
+            <li><a href="#">Search</a></li>
+            <li><a href="/users/logout">Logout</a></li>
+          {{else}}
+            <!-- Guest users -->
+            <li><a href="/users/login">Login</a></li>
+            <li><a href="/users/register">Register</a></li>
+          {{/if}}
+        </ul>
+      </nav>
+
+      <main>
+        {{{body}}}
+      </main>
+
+      <footer>
+        © 2021
+      </footer>
+    </div>
+
   </body>
 
 </html>
